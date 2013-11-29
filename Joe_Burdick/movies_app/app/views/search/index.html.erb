@@ -1,11 +1,5 @@
-<h1>Welcome to Retflix!</h1>
-<p>See our collection of movies below</p>
-
-<%= form_tag 'search', method: :get do %>
-	<%= label_tag 'q', "Search" %>
-	<%= text_field_tag 'q' %>
-	<%= submit_tag %>
-<% end %>
+<h1>Search Results</h1>
+<p>Find me in app/views/search/index.html.erb</p>
 
 <table>
 	<tr>
@@ -23,6 +17,4 @@
  	<% end %>
 </table>
 
-<br />
-
-
+<%= link_to "Home", root_path %>

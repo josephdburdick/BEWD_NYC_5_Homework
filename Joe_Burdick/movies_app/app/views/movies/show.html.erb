@@ -1,0 +1,6 @@
+<h1><%= @movie.name %></h1>
+<p><%= @movie.description %></p>
+<%= image_tag @movie.image %>
+
+<%= link_to "Edit", edit_movie_path(@movie) %>
+<%= link_to "Home", root_path %>
