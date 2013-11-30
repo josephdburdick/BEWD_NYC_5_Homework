@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
   private
 
   def safe_movie
-    params.require(:movie).permit(:title, :description, :year_released)
+    params.require(:movie).permit(:title, :description, :year_released, :rating)
   end
 
   def find_movie

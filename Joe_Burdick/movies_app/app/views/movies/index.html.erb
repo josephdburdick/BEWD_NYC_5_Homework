@@ -14,13 +14,15 @@
 		<th>Title</th>
 		<th>Description</th>
 		<th>Year Released</th>
+		<th>Rating</th>
 	</tr>
 
 	<% @movies.each do |movie| %>
 		<tr>
-	      <td><%= movie.title %></td>
+	      <td><%= link_to movie.title, movie_path(movie.id) %></td>
 	      <td><%= movie.description %></td>
 	      <td><%= movie.year_released %></td>
+	      <td><%= movie.rating %></td>
 	      <td><%= link_to "Edit", edit_movie_path(movie.id) %></td>
     	</tr>
  	<% end %>
