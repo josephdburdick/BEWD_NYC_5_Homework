@@ -4,16 +4,39 @@ class MoviesController < ApplicationController
   end
 
   def edit
-  	movie = Movie.find params[:id]
-  	render :show
+  	find_movie
+  	# render :show
   end
 
   def create
-  	@movie = Movie.create link: params[:id]
-  	redirect_to new_movie_path(@movie)
+    safe_movie
+  	@movie = Movie.create safe_movie
+  	redirect_to @movie
+  end
+
+  def new
+    @movie = Movie.new 
   end
 
   def show
+    find_movie
+  end
+
+  def update
+    find_movie
+    safe_movie
+    @movie.update safe_movie
+    redirect_to @movie
+  end
+
+  private
+
+  def safe_movie
+    params.require(:movie).permit(:title, :description, :year_released)
+  end
+
+  def find_movie
+    @movie = Movie.find params[:id]
   end
 
 end
