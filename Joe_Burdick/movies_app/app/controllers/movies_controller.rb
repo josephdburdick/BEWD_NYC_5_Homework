@@ -5,13 +5,12 @@ class MoviesController < ApplicationController
 
   def edit
   	find_movie
-  	# render :show
   end
 
   def create
     safe_movie
   	@movie = Movie.create safe_movie
-  	redirect_to @movie
+  	save_update_movie
   end
 
   def new
@@ -26,7 +25,8 @@ class MoviesController < ApplicationController
     find_movie
     safe_movie
     @movie.update safe_movie
-    redirect_to @movie
+    
+    save_update_movie
   end
 
   private
@@ -37,6 +37,14 @@ class MoviesController < ApplicationController
 
   def find_movie
     @movie = Movie.find params[:id]
+  end
+
+  def save_update_movie
+    if @movie.save
+      redirect_to @movie
+    else
+      render 'new'
+    end
   end
 
 end
