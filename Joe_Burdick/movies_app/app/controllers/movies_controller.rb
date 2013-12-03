@@ -8,8 +8,8 @@ class MoviesController < ApplicationController
   end
 
   def create
-    safe_movie
-  	@movie = Movie.create safe_movie
+    safe_params
+  	@movie = Movie.create safe_params
   	save_update_movie
   end
 
@@ -23,24 +23,28 @@ class MoviesController < ApplicationController
 
   def update
     find_movie
-    safe_movie
-    @movie.update safe_movie
+    safe_params
+    @movie.update safe_params
     
     save_update_movie
   end
 
   private
 
-  def safe_movie
+  def safe_params
     params.require(:movie).permit(:title, :description, :year_released, :rating)
   end
 
   def find_movie
     @movie = Movie.find params[:id]
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 
   def save_update_movie
     if @movie.save
+      flash[:notice] = "Movie saved successfully"
       redirect_to @movie
     else
       render 'new'
